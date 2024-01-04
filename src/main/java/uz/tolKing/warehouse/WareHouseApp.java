@@ -1,7 +1,7 @@
 package uz.tolKing.warehouse;
 
-public class Main {
+public class WareHouseApp {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
     }
 }
