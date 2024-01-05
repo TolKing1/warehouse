@@ -16,7 +16,7 @@ public abstract class DAOFactory {
             dbProperty.load(fileInputStream);
             return dbProperty;
         } catch (IOException e) {
-            System.out.println("db.properties file load error.");
+            System.out.println("Properties file load error. Check it again");
             System.exit(1);
         }
         return null;
