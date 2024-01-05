@@ -1,19 +1,18 @@
 package uz.tolKing.warehouse.controller;
 
 
-import uz.tolKing.warehouse.dao.ConnectionDAO;
+import uz.tolKing.warehouse.controller.util.TableUtil;
 import uz.tolKing.warehouse.service.ConnectionService;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 
 public class MainController {
     private final UserInteract user;
     private ConnectionService connectionService;
-    private static final int PRODUCT_MENU = 1,
-            DISHES_MENU = 2,
-            LINENS_MENU = 3,
-            QUIT = 0;
+    private static final int
+            QUIT = 0,
+            ADD_ADMIN = -1,
+            ADD_CATEGORY = -2;
 
     public MainController() {
         user = new UserInteract();
@@ -27,33 +26,32 @@ public class MainController {
         System.out.println("Developer: TolKing");
         System.out.println("Name: To'lqin Oltiboyev");
         System.out.println("Email: shaxzodsdf@gmail.com");
-        boolean auth = true;
-        while (auth){
+        while (true){
             String username,password;
-
-            System.out.println("\nPlease enter your user name:");
-            username = user.readLine();
-            System.out.println("Please enter your password:");
-            password = user.readLine();
+            System.out.println();
+            username = user.readLineAndPrint("\nPlease enter your user name:");
+            password = user.readLineAndPrint("Please enter your password:");
             connectionService = new ConnectionService(username,password);
             if (connectionService.getConnection() != null){
+                user.printMsg("\nHello, " + connectionService.getUser());
                 boolean mainFlag = true;
                 while (mainFlag) {
-                    String usernameMeta = connectionService.getUser();
+                    List<String> tableList = connectionService.getTableNames();
+                    String tablesString = TableUtil.tableListByOrder(tableList);
+
+                    user.printMsg("-".repeat(20));
                     int mainInput = user.readInt(
-                            "\nHello, " + usernameMeta +"""   
-                       
-                    Available Commands:
-                    1 - List of all Products
-                    2 - List of Dishes
-                    3 - List of Linens
+                    """
+                    Available tables:
+                    %s
 
                     0 - Close
-                    
-                    Enter integer:
-                    """);
+                    Enter integer:"""
+                            .formatted(tablesString));
+                    user.printMsg("-".repeat(20));
                     switch (mainInput) {
-
+                        case ADD_ADMIN -> System.out.println("admin");
+                        case ADD_CATEGORY -> System.out.println("category");
                         case QUIT -> mainFlag = false;
                         default -> user.printMsg("\n| Wrong command (%s). Try again |\n".formatted(mainInput));
 
@@ -61,7 +59,6 @@ public class MainController {
 
                 }
             }
-
         }
 
     }
