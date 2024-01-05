@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class UserInteract {
     private final Scanner scanner = new Scanner(System.in);
 
-    public String readLine(){
+    public String readLineAndPrint(String prompt){
+        System.out.println(prompt);
         return scanner.nextLine();
     }
 
@@ -14,10 +15,12 @@ public class UserInteract {
         System.out.println(prompt);
         while (true) {
             try {
-                return scanner.nextInt();
+                int res = scanner.nextInt();
+                scanner.nextLine();
+                return res;
             } catch (InputMismatchException e) {
-                System.out.println("\n| Invalid data. Please enter an integer. |\n");
-                scanner.next(); // Clears the invalid input
+                System.out.println("\n| Invalid data. Please enter an integer. |");
+                scanner.nextLine();
             }
         }
     }
