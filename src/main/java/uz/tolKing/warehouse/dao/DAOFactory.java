@@ -21,6 +21,4 @@ public abstract class DAOFactory {
         }
         return null;
     }
-
-    public abstract Connection getConnection() throws SQLException;
 }

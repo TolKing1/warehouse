@@ -6,15 +6,17 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionDAO extends DAOFactory {
-    public ConnectionDAO(String username, String password) {
+    public static Connection connection;
+    public ConnectionDAO(String username, String password) throws SQLException {
         Properties dbProperty = getConfig();
         this.url = "jdbc:postgresql://" + dbProperty.getProperty("host") + "/" + dbProperty.getProperty("dbName");
         this.properties = new Properties();
         this.properties.setProperty("user", username);
         this.properties.setProperty("password", password);
+        connection = DriverManager.getConnection(this.url, this.properties);
     }
 
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(this.url, this.properties);
+    public static Connection getConnection() throws SQLException {
+        return connection;
     }
 }
