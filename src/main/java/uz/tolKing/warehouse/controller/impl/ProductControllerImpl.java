@@ -15,12 +15,15 @@ public class ProductControllerImpl implements Controller {
     private final String tableName;
     String enterPrompt = """              
             Enter your prompt:
+            
             add <id> <name>... - to add item (make sure order and type are correct)
             delete <id> - to delete item with given id
                         
             search <attribute> <value> - example:       search name Cloth
             sort <attribute> <order> - example:         sort id asc
             range <attribute> <min> <max> - example:    range price 1 15
+            
+            P.s: Make sure you are using '.' instead of ',' for decimals
                         
             0 - to back main menu
             
