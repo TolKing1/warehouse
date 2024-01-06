@@ -11,7 +11,7 @@ import uz.tolKing.warehouse.dao.ConnectionDAO;
 
 public class ConnectionService {
 
-    private static Connection connection;
+    protected static Connection connection;
 
     public ConnectionService(String username,String password) {
         try{

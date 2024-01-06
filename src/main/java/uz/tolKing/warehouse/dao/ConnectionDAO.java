@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionDAO extends DAOFactory {
-    public static Connection connection;
+    private static Connection connection;
     public ConnectionDAO(String username, String password) throws SQLException {
         Properties dbProperty = getConfig();
         this.url = "jdbc:postgresql://" + dbProperty.getProperty("host") + "/" + dbProperty.getProperty("dbName");
