@@ -26,12 +26,12 @@ public class AdminService {
 
     public String getUserList() {
         StringBuilder userList = new StringBuilder();
-        String query = "SELECT username FROM pg_user";
+        String query = "SELECT usename FROM pg_user";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             int i = 1;
             while (resultSet.next()) {
-                userList.append("   ").append(i).append(". ").append(resultSet.getString("username")).append("\n");
+                userList.append("   ").append(i).append(". ").append(resultSet.getString("usename")).append("\n");
                 i++;
             }
         } catch (SQLException e) {

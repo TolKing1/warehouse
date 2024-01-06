@@ -33,8 +33,8 @@ public class MainController {
         while (true) {
             //ask login and password
             String username, password;
-            username = user.readLineAndPrint("\nPlease enter your user name:");
-            password = user.readLineAndPrint("Please enter your password:");
+            username = user.readLineAndPrint("\nPlease enter your user name\uD83D\uDC64:");
+            password = user.readLineAndPrint("Please enter your password\uD83D\uDD10:");
 
             //try to connect
             ConnectionService connectionService = new ConnectionService(username, password);
@@ -57,9 +57,9 @@ public class MainController {
                                     Available tables:
                                     %s
                                     
-                                    -2 - add new category
-                                    -1 - admin list
-                                     0 - Close
+                                    -2 - add new category   🆕
+                                    -1 - admin list         👥
+                                     0 - Close              ❌
                                     Enter integer:"""
                                     .formatted(tablesString));
                     user.printMsg("-".repeat(20));

@@ -68,7 +68,6 @@ public class ProductService {
         }
         Savepoint savepoint = null;
         try {
-            System.out.println("|".repeat(30));
             //Manual commit
             try {
                 connection.setAutoCommit(false);
@@ -76,15 +75,21 @@ public class ProductService {
 
                 String SQL = "INSERT INTO %s VALUES (%s)".formatted(table, itemsString);
 
-                AdminService.printStatement(SQL, connection);
-                System.out.println("Item has been successfully added%n");
+                System.out.println("|".repeat(30));
+                try {
+                    Statement statement = connection.createStatement();
+                    statement.execute(SQL);
+                    System.out.printf("Item has been successfully added%n");
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+                System.out.println("|".repeat(30));
                 connection.commit();
             } catch (SQLException e) {
                 rollbackConnection(connection, savepoint);
             } finally {
                 connection.setAutoCommit(initialAutoCommit);
             }
-            System.out.println("|".repeat(30));
         } catch (SQLException e) {
             System.out.println("\n! Try again !\n");
         }

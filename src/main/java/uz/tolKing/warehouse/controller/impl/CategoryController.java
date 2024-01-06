@@ -27,7 +27,7 @@ public class CategoryController implements Controller {
             table();
 
             //table name
-            user.printMsg("Enter name of category: <name> like 'pillow'\n\nLeave 0 or empty to quit");
+            user.printMsg("Enter name of category: <name> like 'pillow'\n\n0 or empty - to quit ❌");
             String name = scan.nextLine().trim().toLowerCase();
             //close
             if (name.isEmpty() || name.equals("0")) {
@@ -43,7 +43,7 @@ public class CategoryController implements Controller {
                     System.out.printf(k + " " + v + " | ");
                 });
                 user.printMsg("\n");
-                user.printMsg("Enter data: <name> <type> like 'name text' \n\n Leave 0  to quit\n Leave empty to confirm");
+                user.printMsg("Enter data: <name> <type> like 'name text' \n\n 0 - quit ❌\n Leave empty - to confirm ✅");
                 String[] next = scan.nextLine().trim().split(" ");
                 //confirm
                 if (next[0].isEmpty()) {

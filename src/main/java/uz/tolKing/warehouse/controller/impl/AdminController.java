@@ -10,7 +10,7 @@ public class AdminController implements Controller {
             Enter your prompt:
             add <login> <password> - to add new admin
                         
-            0 - to back main menu
+            0 - to back main menu ⬅️
             """;
 
     @Override
