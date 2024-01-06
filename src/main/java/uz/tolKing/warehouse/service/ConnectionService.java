@@ -44,7 +44,7 @@ public class ConnectionService {
                 tableList.add(rs.getString("TABLE_NAME"));
             }
         } catch (SQLException e) {
-            System.out.println("\n! Can't get acces to medata !");
+            System.out.println("\n! Can't get access to medata !");
         }
         return tableList;
     }

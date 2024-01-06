@@ -4,8 +4,8 @@ import uz.tolKing.warehouse.controller.Controller;
 import uz.tolKing.warehouse.service.AdminService;
 
 public class AdminController implements Controller {
-    AdminService adminService = new AdminService();
-    String enterPrompt = """
+    final AdminService adminService = new AdminService();
+    final String enterPrompt = """
             ------------------     \s
             Enter your prompt:
             add <login> <password> - to add new admin

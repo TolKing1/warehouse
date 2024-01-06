@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AdminService {
-    Connection connection;
+    final Connection connection;
 
     public AdminService() {
         this.connection = ConnectionService.getConnection();
@@ -31,7 +31,7 @@ public class AdminService {
              ResultSet resultSet = statement.executeQuery(query)) {
             int i = 1;
             while (resultSet.next()) {
-                userList.append("   ").append(i).append(". ").append(resultSet.getString("usename")).append("\n");
+                userList.append("   ").append(i).append(". ").append(resultSet.getString("username")).append("\n");
                 i++;
             }
         } catch (SQLException e) {

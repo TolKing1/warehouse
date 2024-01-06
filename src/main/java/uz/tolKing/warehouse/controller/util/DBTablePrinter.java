@@ -119,7 +119,7 @@ public class DBTablePrinter {
         /**
          * Column label.
          */
-        private String label;
+        private final String label;
 
         /**
          * Generic SQL type of the column as defined in
@@ -128,7 +128,7 @@ public class DBTablePrinter {
          * java.sql.Types
          * </a>.
          */
-        private int type;
+        private final int type;
 
         /**
          * Generic SQL type name of the column as defined in
@@ -137,7 +137,7 @@ public class DBTablePrinter {
          * java.sql.Types
          * </a>.
          */
-        private String typeName;
+        private final String typeName;
 
         /**
          * Width of the column that will be adjusted according to column label
@@ -148,7 +148,7 @@ public class DBTablePrinter {
         /**
          * Column values from each row of a <code>ResultSet</code>.
          */
-        private List<String> values = new ArrayList<>();
+        private final List<String> values = new ArrayList<>();
 
         /**
          * Flag for text justification using <code>String.format</code>.
@@ -587,7 +587,7 @@ public class DBTablePrinter {
             }
 
             // Print out the formatted column labels
-            System.out.print(strToPrint.toString());
+            System.out.print(strToPrint);
 
             String format;
 
@@ -640,39 +640,15 @@ public class DBTablePrinter {
      * @return The category this type belongs to
      */
     private static int whichCategory(int type) {
-        switch (type) {
-            case Types.BOOLEAN:
-                return CATEGORY_BOOLEAN;
-
-            case Types.BIGINT:
-            case Types.TINYINT:
-            case Types.SMALLINT:
-            case Types.INTEGER:
-                return CATEGORY_INTEGER;
-
-            case Types.REAL:
-            case Types.DOUBLE:
-            case Types.DECIMAL:
-            case Types.NUMERIC:
-                return CATEGORY_DOUBLE;
-
-            case Types.DATE:
-            case Types.TIME:
-            case Types.TIME_WITH_TIMEZONE:
-            case Types.TIMESTAMP:
-            case Types.TIMESTAMP_WITH_TIMEZONE:
-                return CATEGORY_DATETIME;
-
-            case Types.VARCHAR:
-            case Types.NVARCHAR:
-            case Types.LONGVARCHAR:
-            case Types.LONGNVARCHAR:
-            case Types.CHAR:
-            case Types.NCHAR:
-                return CATEGORY_STRING;
-
-            default:
-                return CATEGORY_OTHER;
-        }
+        return switch (type) {
+            case Types.BOOLEAN -> CATEGORY_BOOLEAN;
+            case Types.BIGINT, Types.TINYINT, Types.SMALLINT, Types.INTEGER -> CATEGORY_INTEGER;
+            case Types.REAL, Types.DOUBLE, Types.DECIMAL, Types.NUMERIC -> CATEGORY_DOUBLE;
+            case Types.DATE, Types.TIME, Types.TIME_WITH_TIMEZONE, Types.TIMESTAMP, Types.TIMESTAMP_WITH_TIMEZONE ->
+                    CATEGORY_DATETIME;
+            case Types.VARCHAR, Types.NVARCHAR, Types.LONGVARCHAR, Types.LONGNVARCHAR, Types.CHAR, Types.NCHAR ->
+                    CATEGORY_STRING;
+            default -> CATEGORY_OTHER;
+        };
     }
 }

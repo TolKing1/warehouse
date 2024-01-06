@@ -9,7 +9,7 @@ import java.sql.Connection;
 public class ProductControllerImpl implements Controller {
     private final Connection connection;
     private final String tableName;
-    String enterPrompt = """
+    final String enterPrompt = """
             ------------------         \s
             Enter your prompt:
                         
