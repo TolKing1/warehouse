@@ -17,7 +17,7 @@ public class ProductService {
             preparedStatement.setInt(1,id);
             int affected = preparedStatement.executeUpdate();
             //print
-            System.out.printf("| %d items  is succesfully deleted |%n", affected);
+            System.out.printf("| %d item is successfully deleted |%n", affected);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -39,7 +39,7 @@ public class ProductService {
             Statement statement = connection.createStatement();
             int affected = statement.executeUpdate(SQL);
             //print
-            System.out.printf("| %d items  is succesfully added |%n", affected);
+            System.out.printf("| %d item  is successfully added |%n", affected);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
