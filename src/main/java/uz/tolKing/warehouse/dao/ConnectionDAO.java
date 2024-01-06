@@ -16,7 +16,7 @@ public class ConnectionDAO extends DAOFactory {
         connection = DriverManager.getConnection(this.url, this.properties);
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return connection;
     }
 }

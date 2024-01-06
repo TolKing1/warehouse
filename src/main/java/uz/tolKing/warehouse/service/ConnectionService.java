@@ -16,7 +16,7 @@ public class ConnectionService {
     public ConnectionService(String username,String password) {
         try{
             ConnectionDAO connectionDAO = new ConnectionDAO(username, password);
-            connection = ConnectionDAO.getConnection();
+            connection = connectionDAO.getConnection();
         } catch (SQLException e) {
             connection = null;
             System.out.println("\n! Your username or password is incorrect. Try again !\n");
