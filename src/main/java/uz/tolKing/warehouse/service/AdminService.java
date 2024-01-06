@@ -17,7 +17,7 @@ public class AdminService {
         try {
             Statement statement = connection.createStatement();
             statement.execute(query);
-            System.out.printf("User  is successfully added%n");
+            System.out.printf("User  has been successfully added%n");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -26,7 +26,7 @@ public class AdminService {
 
     public String getUserList() {
         StringBuilder userList = new StringBuilder();
-        String query = "SELECT usename FROM pg_user";
+        String query = "SELECT username FROM pg_user";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             int i = 1;
@@ -35,7 +35,7 @@ public class AdminService {
                 i++;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         return userList.toString();
