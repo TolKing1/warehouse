@@ -2,7 +2,7 @@ package uz.tolKing.warehouse.service;
 
 import java.sql.*;
 
-import static uz.tolKing.warehouse.dao.ConnectionDAO.connection;
+import static uz.tolKing.warehouse.service.ConnectionService.connection;
 
 public class ProductService {
     public void delete(String table, String id) {
@@ -75,17 +75,7 @@ public class ProductService {
 
                 String SQL = "INSERT INTO %s VALUES (%s)".formatted(table, itemsString);
 
-                System.out.println("|".repeat(30));
-                //Execute
-                try {
-                    Statement statement = connection.createStatement();
-                    int affected = statement.executeUpdate(SQL);
-                    //print
-                    System.out.printf("%d item  is successfully added%n", affected);
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                }
-                System.out.println("|".repeat(30));
+                AdminService.printStatement(SQL, connection);
 
                 connection.commit();
             } catch (SQLException e) {
