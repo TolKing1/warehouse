@@ -11,14 +11,11 @@ import uz.tolKing.warehouse.dao.ConnectionDAO;
 
 public class ConnectionService {
 
-    private static ConnectionDAO connectionDAO;
     private static Connection connection;
-
-
 
     public ConnectionService(String username,String password) {
         try{
-            connectionDAO = new ConnectionDAO(username,password);
+            ConnectionDAO connectionDAO = new ConnectionDAO(username, password);
             connection = ConnectionDAO.getConnection();
         } catch (SQLException e) {
             connection = null;
