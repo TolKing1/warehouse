@@ -1,14 +1,9 @@
 package uz.tolKing.warehouse.controller.impl;
 
 import uz.tolKing.warehouse.controller.Controller;
-import uz.tolKing.warehouse.controller.util.UserInteract;
 import uz.tolKing.warehouse.service.AdminService;
 
-import java.util.Scanner;
-
 public class AdminController implements Controller {
-    protected final UserInteract user = new UserInteract();
-    protected final Scanner scan = new Scanner(System.in);
     AdminService adminService = new AdminService();
     String enterPrompt = """
             ------------------     \s
@@ -47,8 +42,7 @@ public class AdminController implements Controller {
             //add
             else if (next[0].toLowerCase().startsWith("add") && next.length == 3) {
                 adminService.add(next[1], next[2]);
-            }
-            else {
+            } else {
                 user.printMsg(extraData);
             }
         }
