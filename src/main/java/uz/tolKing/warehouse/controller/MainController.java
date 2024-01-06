@@ -2,6 +2,7 @@ package uz.tolKing.warehouse.controller;
 
 
 import uz.tolKing.warehouse.controller.impl.AdminController;
+import uz.tolKing.warehouse.controller.impl.CategoryController;
 import uz.tolKing.warehouse.controller.impl.ProductControllerImpl;
 import uz.tolKing.warehouse.controller.util.TableUtil;
 import uz.tolKing.warehouse.controller.util.UserInteract;
@@ -47,7 +48,7 @@ public class MainController {
 
                 //print available commands and tables
                 while (mainFlag) {
-                    List<String> tableList = connectionService.getTableNames();
+                    List<String> tableList = ConnectionService.getTableNames();
                     String tablesString = TableUtil.tableListByOrder(tableList);
 
                     user.printMsg("-".repeat(20));
@@ -71,7 +72,8 @@ public class MainController {
                         AdminController adminController = new AdminController();
                         adminController.console();
                     } else if (mainInput == ADD_CATEGORY) {
-                        System.out.println("category");
+                        CategoryController categoryController = new CategoryController();
+                        categoryController.console();
                     } else if (mainInput == QUIT) {
                         mainFlag = false;
                     } else {

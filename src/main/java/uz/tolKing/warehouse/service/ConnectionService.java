@@ -34,7 +34,7 @@ public class ConnectionService {
             return "\n! Can't find username !";
         }
     }
-    public List<String> getTableNames(){
+    public static List<String> getTableNames(){
         List<String> tableList = new ArrayList<>();
         try {
             DatabaseMetaData md = connection.getMetaData();
