@@ -1,4 +1,4 @@
-package uz.tolKing.warehouse.controller;
+package uz.tolKing.warehouse.controller.util;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

@@ -1,7 +1,7 @@
 package uz.tolKing.warehouse.controller.impl;
 
 import uz.tolKing.warehouse.controller.Controller;
-import uz.tolKing.warehouse.controller.UserInteract;
+import uz.tolKing.warehouse.controller.util.UserInteract;
 import uz.tolKing.warehouse.controller.util.DBTablePrinter;
 import uz.tolKing.warehouse.service.ProductService;
 
