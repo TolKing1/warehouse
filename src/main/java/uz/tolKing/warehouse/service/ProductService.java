@@ -5,7 +5,7 @@ import java.sql.*;
 import static uz.tolKing.warehouse.dao.ConnectionDAO.connection;
 
 public class ProductService {
-    public static void delete(String table, String id) {
+    public void delete(String table, String id) {
         int idNum;
         boolean initialAutoCommit = false;
 
@@ -50,7 +50,7 @@ public class ProductService {
         }
     }
 
-    public static void add(String table, String[] items) {
+    public void add(String table, String[] items) {
         StringBuilder itemsString = new StringBuilder();
         for (int i = 1; i < items.length; i++) {
             itemsString.append('\'').append(items[i]).append('\'');
@@ -97,6 +97,7 @@ public class ProductService {
             System.out.println("\n! Try again !\n");
         }
     }
+
 
     private static void rollbackConnection(Connection connection, Savepoint savepoint) throws SQLException {
         if (savepoint != null) {

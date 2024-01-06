@@ -13,8 +13,7 @@ public class ProductControllerImpl implements Controller {
     protected final Scanner scan = new Scanner(System.in);
     private final Connection connection;
     private final String tableName;
-    String enterPrompt = """
-                                
+    String enterPrompt = """              
             Enter your prompt to filter data:
             add <id> <name>... - to add item (make sure order and type are correct)
             delete <id> - to delete item with given id
@@ -23,7 +22,6 @@ public class ProductControllerImpl implements Controller {
             sort <attribute> <order> - to sort ("name asc" or "price desc")
             range <attribute> <min> <max> - to search by range ("price 2.99 12.5")
                         
-                 
             0 - to back main menu""";
 
     public ProductControllerImpl(Connection connection, String tableName) {
@@ -47,17 +45,23 @@ public class ProductControllerImpl implements Controller {
             //split input
             String[] next = scan.nextLine().trim().split(" ");
 
+            ProductService productService = new ProductService();
+
             //exit
             if (next.length == 1 && next[0].equals("0")) {
                 break;
             }
             //delete
             else if (next[0].toLowerCase().startsWith("del") && next.length == 2) {
-                ProductService.delete(tableName, next[1]);
+                productService.delete(tableName, next[1]);
             }
             //add
             else if (next[0].toLowerCase().startsWith("add")) {
-                ProductService.add(tableName, next);
+                productService.add(tableName, next);
+            }
+            //search
+            else if (next[0].toLowerCase().startsWith("search") && next.length == 3) {
+
             }
         }
     }
