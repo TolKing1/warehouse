@@ -9,24 +9,24 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class ProductControllerImpl implements Controller {
-    private final Connection connection;
-    private final String tableName;
     protected final UserInteract user = new UserInteract();
     protected final Scanner scan = new Scanner(System.in);
+    private final Connection connection;
+    private final String tableName;
     String enterPrompt = """
                                 
             Enter your prompt to filter data:
             add <id> <name>... - to add item (make sure order and type are correct)
             delete <id> - to delete item with given id
-            
+                        
             search <attribute> <value> - to search ("name bowl")
             sort <attribute> <order> - to sort ("name asc" or "price desc")
             range <attribute> <min> <max> - to search by range ("price 2.99 12.5")
-            
-     
+                        
+                 
             0 - to back main menu""";
 
-    public ProductControllerImpl(Connection connection,String tableName) {
+    public ProductControllerImpl(Connection connection, String tableName) {
         this.connection = connection;
         this.tableName = tableName;
     }
@@ -34,7 +34,7 @@ public class ProductControllerImpl implements Controller {
 
     @Override
     public void table() {
-        DBTablePrinter.printTable(this.connection,this.tableName);
+        DBTablePrinter.printTable(this.connection, this.tableName);
     }
 
     @Override
@@ -52,18 +52,12 @@ public class ProductControllerImpl implements Controller {
                 break;
             }
             //delete
-            else if (next.length == 2 && next[0].startsWith("del")) {
-                try {
-                    int id = Integer.parseInt(next[1]);
-
-                    ProductService.delete(tableName,id);
-                }catch (NumberFormatException e){
-                    user.printMsg("\n! Try with integer !");
-                }
+            else if (next[0].toLowerCase().startsWith("del") && next.length == 2) {
+                ProductService.delete(tableName, next[1]);
             }
             //add
-            else if (next[0].startsWith("add")) {
-                ProductService.add(tableName,next);
+            else if (next[0].toLowerCase().startsWith("add")) {
+                ProductService.add(tableName, next);
             }
         }
     }
