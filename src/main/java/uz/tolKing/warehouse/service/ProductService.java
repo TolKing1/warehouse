@@ -97,6 +97,47 @@ public class ProductService {
             System.out.println("\n! Try again !\n");
         }
     }
+    public ResultSet search(String table,String[] items){
+        String SQL = "SELECT * FROM %s WHERE %s = '%s'".formatted(table, items[1],items[2]);
+
+        //Execute
+        try {
+            Statement statement = connection.createStatement();
+             return statement.executeQuery(SQL);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    public ResultSet sort(String table,String[] items){
+        String SQL = "SELECT * FROM %s ORDER BY %s %s".formatted(
+                table,
+                items[1],
+                ( items[2].toLowerCase().startsWith("d") )?"desc":"asc"
+        );
+        //Execute
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(SQL);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    public ResultSet range(String table,String[] items){
+        String SQL = "SELECT * FROM %s WHERE %s BETWEEN '%s' and '%s'".formatted(table, items[1],items[2],items[3]);
+        //Execute
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(SQL);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 
 
     private static void rollbackConnection(Connection connection, Savepoint savepoint) throws SQLException {
