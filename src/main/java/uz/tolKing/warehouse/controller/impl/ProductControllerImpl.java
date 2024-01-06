@@ -13,7 +13,8 @@ public class ProductControllerImpl implements Controller {
     protected final Scanner scan = new Scanner(System.in);
     private final Connection connection;
     private final String tableName;
-    String enterPrompt = """              
+    String enterPrompt = """
+            ------------------         \s
             Enter your prompt:
             
             add <id> <name>... - to add item (make sure order and type are correct)
@@ -42,11 +43,12 @@ public class ProductControllerImpl implements Controller {
 
     @Override
     public void console() {
+        //print table
+        table();
+
         //print instructions
         user.printMsg(enterPrompt);
 
-        //print table
-        table();
         while (true) {
             //split input
             String[] next = scan.nextLine().trim().split(" ");
@@ -78,6 +80,8 @@ public class ProductControllerImpl implements Controller {
             //rang
             else if (next[0].toLowerCase().startsWith("range") && next.length == 4) {
                 DBTablePrinter.printResultSet(productService.range(tableName, next));
+            }else {
+                user.printMsg(extraData);
             }
         }
     }

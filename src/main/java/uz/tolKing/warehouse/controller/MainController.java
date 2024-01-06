@@ -1,6 +1,7 @@
 package uz.tolKing.warehouse.controller;
 
 
+import uz.tolKing.warehouse.controller.impl.AdminController;
 import uz.tolKing.warehouse.controller.impl.ProductControllerImpl;
 import uz.tolKing.warehouse.controller.util.TableUtil;
 import uz.tolKing.warehouse.controller.util.UserInteract;
@@ -15,7 +16,6 @@ public class MainController {
             ADD_ADMIN = -1,
             ADD_CATEGORY = -2;
     private final UserInteract user;
-    private ConnectionService connectionService;
 
     public MainController() {
         user = new UserInteract();
@@ -36,7 +36,7 @@ public class MainController {
             password = user.readLineAndPrint("Please enter your password:");
 
             //try to connect
-            connectionService = new ConnectionService(username, password);
+            ConnectionService connectionService = new ConnectionService(username, password);
             Connection connection = ConnectionService.getConnection();
 
             if (ConnectionService.getConnection() != null) {
@@ -55,8 +55,10 @@ public class MainController {
                             """
                                     Available tables:
                                     %s
-
-                                    0 - Close
+                                    
+                                    -2 - add new category
+                                    -1 - admin list
+                                     0 - Close
                                     Enter integer:"""
                                     .formatted(tablesString));
                     user.printMsg("-".repeat(20));
@@ -66,7 +68,8 @@ public class MainController {
                         ProductControllerImpl productController = new ProductControllerImpl(connection,tableList.get(mainInput - 1));
                         productController.console();
                     } else if (mainInput == ADD_ADMIN) {
-                        System.out.println("admin");
+                        AdminController adminController = new AdminController();
+                        adminController.console();
                     } else if (mainInput == ADD_CATEGORY) {
                         System.out.println("category");
                     } else if (mainInput == QUIT) {
