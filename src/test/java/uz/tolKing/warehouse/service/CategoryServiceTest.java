@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CategoryServiceTest {
     private static CategoryService categoryService;
     private static Connection connection;
+    private static String tableName = "test_table";
 
     @BeforeAll
     static void setUp() {
@@ -47,7 +48,24 @@ public class CategoryServiceTest {
 
     @AfterAll
     static void tearDown() {
-        // Rollback
+        String sql = """
+                DO $$\s
+                BEGIN
+                    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = '%s') THEN
+                        EXECUTE 'DROP TABLE %s';
+                    ELSE
+                        RAISE NOTICE 'Table "%s" does not exist.';
+                    END IF;
+                END $$;
+                """.formatted(tableName,tableName,tableName);
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        // Close
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -59,7 +77,6 @@ public class CategoryServiceTest {
     @Test
     void testAdd() {
         //test parameters
-        String tableName = "test_table";
         Map<String, String> params = new HashMap<>();
         params.put("column1", "VARCHAR(255)");
         params.put("column2", "INT");
