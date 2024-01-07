@@ -43,7 +43,7 @@ public class CategoryController implements Controller {
                     System.out.printf(k + " " + v + " | ");
                 });
                 user.printMsg("\n");
-                user.printMsg("Enter data: <name> <type> like 'name text' \n\n 0 - quit ❌\n Leave empty - to confirm ✅");
+                user.printMsg("Enter column: <name> <type> like 'name varchar(200)' \n\n 0 - quit ❌\n Leave empty - to confirm ✅");
                 String[] next = scan.nextLine().trim().split(" ");
                 //confirm
                 if (next[0].isEmpty()) {

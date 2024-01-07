@@ -40,7 +40,7 @@ public class MainController {
             ConnectionService connectionService = new ConnectionService(username, password);
             Connection connection = ConnectionService.getConnection();
 
-            if (ConnectionService.getConnection() != null) {
+            if (connection != null) {
                 boolean mainFlag = true;
 
                 //print username
