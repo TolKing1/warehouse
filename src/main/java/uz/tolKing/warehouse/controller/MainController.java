@@ -1,8 +1,8 @@
 package uz.tolKing.warehouse.controller;
 
 
-import uz.tolKing.warehouse.controller.impl.AdminController;
-import uz.tolKing.warehouse.controller.impl.CategoryController;
+import uz.tolKing.warehouse.controller.impl.AdminControllerImpl;
+import uz.tolKing.warehouse.controller.impl.CategoryControllerImpl;
 import uz.tolKing.warehouse.controller.impl.ProductControllerImpl;
 import uz.tolKing.warehouse.controller.util.TableUtil;
 import uz.tolKing.warehouse.controller.util.UserInteract;
@@ -69,11 +69,11 @@ public class MainController {
                         ProductControllerImpl productController = new ProductControllerImpl(connection,tableList.get(mainInput - 1));
                         productController.console();
                     } else if (mainInput == ADD_ADMIN) {
-                        AdminController adminController = new AdminController();
-                        adminController.console();
+                        AdminControllerImpl adminControllerImpl = new AdminControllerImpl();
+                        adminControllerImpl.console();
                     } else if (mainInput == ADD_CATEGORY) {
-                        CategoryController categoryController = new CategoryController();
-                        categoryController.console();
+                        CategoryControllerImpl categoryControllerImpl = new CategoryControllerImpl();
+                        categoryControllerImpl.console();
                     } else if (mainInput == QUIT) {
                         mainFlag = false;
                     } else {

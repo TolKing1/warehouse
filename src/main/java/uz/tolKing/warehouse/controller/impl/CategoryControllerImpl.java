@@ -7,7 +7,7 @@ import uz.tolKing.warehouse.service.ConnectionService;
 
 import java.util.*;
 
-public class CategoryController implements Controller {
+public class CategoryControllerImpl implements Controller {
     final CategoryService categoryService = new CategoryService();
 
 

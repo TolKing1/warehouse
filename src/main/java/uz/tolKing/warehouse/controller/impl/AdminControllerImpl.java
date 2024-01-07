@@ -3,7 +3,7 @@ package uz.tolKing.warehouse.controller.impl;
 import uz.tolKing.warehouse.controller.Controller;
 import uz.tolKing.warehouse.service.AdminService;
 
-public class AdminController implements Controller {
+public class AdminControllerImpl implements Controller {
     final AdminService adminService = new AdminService();
     final String enterPrompt = """
             ------------------     \s
