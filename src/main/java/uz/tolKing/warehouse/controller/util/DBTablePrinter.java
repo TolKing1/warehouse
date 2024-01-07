@@ -376,7 +376,6 @@ public class DBTablePrinter {
             printResultSet(rs, maxStringColWidth);
 
         } catch (SQLException e) {
-            System.err.println("SQL exception in DBTablePrinter. Message:");
             System.err.println(e.getMessage());
         } finally {
             try {
@@ -618,7 +617,6 @@ public class DBTablePrinter {
              */
 
         } catch (SQLException e) {
-            System.err.println("SQL exception in DBTablePrinter. Message:");
             System.err.println(e.getMessage());
         }
     }

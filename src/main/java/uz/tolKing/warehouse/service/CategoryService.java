@@ -14,7 +14,7 @@ public class CategoryService {
         this.connection = ConnectionService.getConnection();
     }
     public void add(String tableName, Map<String,String> params) {
-        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE ");
+        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
         createTableQuery.append(tableName).append(" (");
         createTableQuery.append("id").append(" ").append("SERIAL PRIMARY KEY").append(",");
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -42,6 +42,7 @@ public class CategoryService {
                     Statement statement = connection.createStatement();
                     statement.execute(createTableQuery.toString());
                     System.out.printf("Table has been successfully added%n");
+                    statement.close();
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
@@ -50,6 +51,7 @@ public class CategoryService {
 
                 connection.commit();
             } catch (SQLException e) {
+                rollbackConnection(connection, savepoint);
                 rollbackConnection(connection, savepoint);
             } finally {
                 connection.setAutoCommit(initialAutoCommit);

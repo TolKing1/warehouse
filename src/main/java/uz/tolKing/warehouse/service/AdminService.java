@@ -18,6 +18,7 @@ public class AdminService {
             Statement statement = connection.createStatement();
             statement.execute(query);
             System.out.printf("User  has been successfully added%n");
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -42,9 +43,8 @@ public class AdminService {
     }
 
     public void add(String user, String password) {
-        String query = "CREATE USER %s WITH PASSWORD '%s';".formatted(user, password) +
-                "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO %s;".formatted(user) +
-                "SELECT pg_reload_conf();";
+        String query =  "CREATE ROLE %s WITH LOGIN SUPERUSER PASSWORD '%s';".formatted(user, password) +
+                        "SELECT pg_reload_conf();";
         printStatement(query, connection);
     }
 }

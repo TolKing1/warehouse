@@ -5,6 +5,14 @@ import java.sql.*;
 import static uz.tolKing.warehouse.service.ConnectionService.connection;
 
 public class ProductService {
+    private static void rollbackConnection(Connection connection, Savepoint savepoint) throws SQLException {
+        if (savepoint != null) {
+            connection.rollback(savepoint);
+        } else {
+            connection.rollback();
+        }
+    }
+
     public void delete(String table, String id) {
         int idNum;
         boolean initialAutoCommit = false;
@@ -33,6 +41,7 @@ public class ProductService {
                     int affected = preparedStatement.executeUpdate();
                     //print
                     System.out.printf("%d item has been successfully deleted%n", affected);
+                    preparedStatement.close();
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -80,6 +89,7 @@ public class ProductService {
                     Statement statement = connection.createStatement();
                     statement.execute(SQL);
                     System.out.printf("Item has been successfully added%n");
+                    statement.close();
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
@@ -94,54 +104,39 @@ public class ProductService {
             System.out.println("\n! Try again !\n");
         }
     }
-    public ResultSet search(String table,String[] items){
-        String SQL = "SELECT * FROM %s WHERE %s = '%s'".formatted(table, items[1],items[2]);
+
+    public ResultSet search(String table, String[] items) {
+        String SQL = "SELECT * FROM %s WHERE %s = '%s'".formatted(table, items[1], items[2]);
 
         //Execute
-        try {
-            Statement statement = connection.createStatement();
-             return statement.executeQuery(SQL);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return null;
+        return printStatement(SQL);
     }
-    public ResultSet sort(String table,String[] items){
+
+    public ResultSet sort(String table, String[] items) {
         String SQL = "SELECT * FROM %s ORDER BY %s %s".formatted(
                 table,
                 items[1],
-                ( items[2].toLowerCase().startsWith("d") )?"desc":"asc"
+                (items[2].toLowerCase().startsWith("d")) ? "desc" : "asc"
         );
         //Execute
-        try {
-            Statement statement = connection.createStatement();
-            return statement.executeQuery(SQL);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return null;
+        return printStatement(SQL);
     }
-    public ResultSet range(String table,String[] items){
-        String SQL = "SELECT * FROM %s WHERE %s BETWEEN '%s' and '%s'".formatted(table, items[1],items[2],items[3]);
+
+    public ResultSet range(String table, String[] items) {
+        String SQL = "SELECT * FROM %s WHERE %s BETWEEN '%s' and '%s'".formatted(table, items[1], items[2], items[3]);
         //Execute
+        return printStatement(SQL);
+    }
+
+    private ResultSet printStatement(String SQL) {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery(SQL);
+            ResultSet rs = statement.executeQuery(SQL);
+            return rs;
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return null;
-    }
-
-
-    private static void rollbackConnection(Connection connection, Savepoint savepoint) throws SQLException {
-        if (savepoint != null) {
-            connection.rollback(savepoint);
-        } else {
-            connection.rollback();
-        }
     }
 }
