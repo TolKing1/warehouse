@@ -25,17 +25,18 @@ create table if not exists linen
 -- Insert data into the dish table
 INSERT INTO dish (name, price, quantity, material, set)
 VALUES
-    ('Premium Dinner Plate', 12.99, 10, 'Ceramic', true),
-    ('Glass Salad Bowl', 9.99, 15, 'Glass', false),
-    ('Stainless Steel Cutlery Set', 14.50, 8, 'Stainless Steel', true),
-    ('Reusable Plastic Tumblers', 7.25, 20, 'Plastic', false),
-    ('Elegant Porcelain Serving Platter', 18.75, 12, 'Porcelain', true);
+    ('plate', 12.99, 10, 'ceramic', true),
+    ('bowl', 9.99, 15, 'glass', false),
+    ('cutlery_set', 14.50, 8, 'stainless_steel', true),
+    ('plastic_tumblers', 7.25, 20, 'plastic', false),
+    ('serving_platter', 18.75, 12, 'porcelain', true);
 
 -- Insert data into the linen table
 INSERT INTO linen (name, price, quantity, thickness, area)
 VALUES
-    ('Luxury Tablecloth', 24.99, 5, 0.5, 10.0),
-    ('Soft Napkin Set', 19.50, 8, 0.7, 15.5),
-    ('Durable Table Runner', 15.75, 12, 0.6, 12.0),
-    ('High-Quality Placemats', 30.00, 6, 0.8, 18.0),
-    ('Embroidered Tea Towels', 22.99, 10, 0.4, 8.5);
+    ('luxury_tablecloth', 24.99, 5, 0.5, 10.0),
+    ('soft_napkin', 19.50, 8, 0.7, 15.5),
+    ('table_runner', 15.75, 12, 0.6, 12.0),
+    ('placemats', 30.00, 6, 0.8, 18.0),
+    ('tea_towels', 22.99, 10, 0.4, 8.5);
+
