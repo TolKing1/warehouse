@@ -10,7 +10,6 @@ public class ProductControllerImpl implements Controller {
     private final Connection connection;
     private final String tableName;
     final String enterPrompt = """
-            ------------------         \s
             Enter your prompt:
                         
             add <id> <name>... - to add item (make sure order and type are correct)
@@ -23,7 +22,6 @@ public class ProductControllerImpl implements Controller {
             P.s: Make sure you are using '.' instead of ',' for decimals
                         
             0 - to back main menu ️ ⬅️
-                        
             """;
 
     public ProductControllerImpl(Connection connection, String tableName) {
@@ -39,6 +37,7 @@ public class ProductControllerImpl implements Controller {
 
     @Override
     public void console() {
+
         //print table
         table();
 
@@ -55,8 +54,9 @@ public class ProductControllerImpl implements Controller {
             if (next.length == 1 && next[0].equals("0")) {
                 break;
             }
+            user.printMsg("-".repeat(40));
             //delete
-            else if (next[0].toLowerCase().startsWith("del") && next.length == 2) {
+            if (next[0].toLowerCase().startsWith("del") && next.length == 2) {
                 productService.delete(tableName, next[1]);
                 table();
             }

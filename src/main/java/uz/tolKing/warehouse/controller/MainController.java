@@ -44,14 +44,15 @@ public class MainController {
                 boolean mainFlag = true;
 
                 //print username
-                user.printMsg("\nHello, " + connectionService.getUser());
+                user.printMsg("-".repeat(40));
+                user.printMsg("Hello, " + connectionService.getUser());
 
                 //print available commands and tables
                 while (mainFlag) {
                     List<String> tableList = ConnectionService.getTableNames();
                     String tablesString = TableUtil.tableListByOrder(tableList);
 
-                    user.printMsg("-".repeat(20));
+                    user.printMsg("-".repeat(40));
                     int mainInput = user.readInt(
                             """
                                     Available tables:
@@ -62,7 +63,6 @@ public class MainController {
                                      0 - Close              ❌
                                     Enter integer:"""
                                     .formatted(tablesString));
-                    user.printMsg("-".repeat(20));
 
                     //wait for command input
                     if (mainInput > 0 && mainInput - 1 <= tableList.size()) {

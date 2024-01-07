@@ -23,6 +23,7 @@ public class CategoryControllerImpl implements Controller {
     public void console() {
         main:
         while (true) {
+            user.printMsg("-".repeat(40));
             //print users
             table();
 

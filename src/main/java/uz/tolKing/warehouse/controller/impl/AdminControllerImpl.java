@@ -5,8 +5,8 @@ import uz.tolKing.warehouse.service.AdminService;
 
 public class AdminControllerImpl implements Controller {
     final AdminService adminService = new AdminService();
+
     final String enterPrompt = """
-            ------------------     \s
             Enter your prompt:
             add <login> <password> - to add new admin
                         
@@ -27,6 +27,7 @@ public class AdminControllerImpl implements Controller {
     @Override
     public void console() {
         while (true) {
+            user.printMsg("-".repeat(40));
             //print users
             table();
 
