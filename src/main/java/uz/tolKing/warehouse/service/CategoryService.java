@@ -37,16 +37,16 @@ public class CategoryService {
                 connection.setAutoCommit(false);
                 savepoint = connection.setSavepoint();
 
-                System.out.println("|".repeat(25));
+                System.out.println("|".repeat(52));
                 try {
                     Statement statement = connection.createStatement();
                     statement.execute(createTableQuery.toString());
-                    System.out.printf("Table has been successfully added%n");
+                    System.out.println("|      A table has been successfully added.        |");
                     statement.close();
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
-                System.out.println("|".repeat(25));
+                System.out.println("|".repeat(52));
 
 
                 connection.commit();
@@ -57,7 +57,7 @@ public class CategoryService {
                 connection.setAutoCommit(initialAutoCommit);
             }
         } catch (SQLException e) {
-            System.out.println("\n! Try again !\n");
+            System.out.println("\n! Try again !");
         }
     }
     private static void rollbackConnection(Connection connection, Savepoint savepoint) throws SQLException {

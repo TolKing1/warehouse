@@ -13,16 +13,16 @@ public class AdminService {
     }
 
     static void printStatement(String query, Connection connection) {
-        System.out.println("|".repeat(30));
+        System.out.println("|".repeat(40));
         try {
             Statement statement = connection.createStatement();
             statement.execute(query);
-            System.out.printf("User  has been successfully added%n");
+            System.out.printf("| The user has been successfully added.|%n");
             statement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("|".repeat(30));
+        System.out.println("|".repeat(40));
     }
 
     public String getUserList() {
@@ -32,7 +32,7 @@ public class AdminService {
              ResultSet resultSet = statement.executeQuery(query)) {
             int i = 1;
             while (resultSet.next()) {
-                userList.append("   ").append(i).append(". ").append(resultSet.getString("usename")).append("\n");
+                userList.append("│  ").append(i).append(". ").append(resultSet.getString("usename")).append("\n");
                 i++;
             }
         } catch (SQLException e) {

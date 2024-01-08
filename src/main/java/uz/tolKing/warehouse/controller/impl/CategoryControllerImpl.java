@@ -10,25 +10,27 @@ import java.util.*;
 public class CategoryControllerImpl implements Controller {
     final CategoryService categoryService = new CategoryService();
 
-
     @Override
     public void table() {
         List<String> tableList = ConnectionService.getTableNames();
         String tablesString = TableUtil.tableListByOrder(tableList);
 
-        user.printMsg("Tables:\n%s".formatted(tablesString));
+        user.printMsg("│ Categories:\n%s│".formatted(tablesString));
     }
 
     @Override
     public void console() {
         main:
         while (true) {
-            user.printMsg("-".repeat(40));
+            user.printMsg("+"+"─".repeat(53));
             //print users
             table();
 
             //table name
-            user.printMsg("Enter name of category: <name> like 'pillow'\n\n0 or empty - to quit ❌");
+            user.printMsg(
+                    "│ 0 or empty - to quit ❌");
+            System.out.print(
+                    "│ Enter name of new category:  ");
             String name = scan.nextLine().trim().toLowerCase();
             //close
             if (name.isEmpty() || name.equals("0")) {
@@ -38,13 +40,19 @@ public class CategoryControllerImpl implements Controller {
 
             //params
             while (true) {
-                user.printMsg("-".repeat(20));
-                user.printMsg("Your table:\n");
+                user.printMsg("+"+"-".repeat(39));
+                user.printMsg("〡 Your table:");
+                System.out.print("〡     ");
                 params.forEach((k, v) -> {
                     System.out.printf(k + " " + v + " | ");
                 });
-                user.printMsg("\n");
-                user.printMsg("Enter column: <name> <type> like 'name varchar(200)' \n\n 0 - quit ❌\n Leave empty - to confirm ✅");
+                user.printMsg("\n〡");
+                String prompt = """
+                        〡 Enter column: <name> <type> like 'name varchar(200)'
+                        〡
+                        〡 0 - quit              ❌
+                        〡 empty - to confirm    ✅""";
+                user.printMsg(prompt);
                 String[] next = scan.nextLine().trim().split(" ");
                 //confirm
                 if (next[0].isEmpty()) {
@@ -58,7 +66,12 @@ public class CategoryControllerImpl implements Controller {
                 else if (next.length == 2) {
                     params.put(next[0], next[1]);
                 } else {
-                    user.printMsg("\n| Incorrect data. Try again like '<name> <type>'|\n");
+                    String error = """
+                            *************************************************
+                            * Incorrect data. Try again like '<name> <type> *
+                            *************************************************
+                            """;
+                    user.printMsg(error);
                 }
             }
 

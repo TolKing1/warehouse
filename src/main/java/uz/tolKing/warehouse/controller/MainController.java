@@ -33,7 +33,7 @@ public class MainController {
         while (true) {
             //ask login and password
             String username, password;
-            username = user.readLineAndPrint("\nPlease enter your user name\uD83D\uDC64:");
+            username = user.readLineAndPrint("Please enter your user name\uD83D\uDC64:");
             password = user.readLineAndPrint("Please enter your password\uD83D\uDD10:");
 
             //try to connect
@@ -55,7 +55,7 @@ public class MainController {
                     user.printMsg("+"+"═".repeat(39));
                     String prompt = """
                             ║ Available tables:
-                            %s|
+                            %s║
                             ║ Features for admin:
                             ║   -2 - add new category   🆕
                             ║   -1 - admin list         👥
@@ -79,7 +79,7 @@ public class MainController {
                     } else if (mainInput == QUIT) {
                         mainFlag = false;
                     } else {
-                        user.printMsg("\n| Wrong command (%s). Try again |\n".formatted(mainInput));
+                        user.printMsg("| Wrong command (%s). Try again |".formatted(mainInput));
                     }
                 }
             }

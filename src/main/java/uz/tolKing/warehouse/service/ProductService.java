@@ -32,7 +32,7 @@ public class ProductService {
                 savepoint = connection.setSavepoint();
 
                 String SQL = "DELETE FROM %s WHERE id = ?".formatted(table);
-                System.out.println("|".repeat(30));
+                System.out.println("|".repeat(52));
 
                 //Execute
                 try {
@@ -40,12 +40,12 @@ public class ProductService {
                     preparedStatement.setInt(1, idNum);
                     int affected = preparedStatement.executeUpdate();
                     //print
-                    System.out.printf("%d item has been successfully deleted%n", affected);
+                    System.out.printf("|       %d item has been successfully deleted      |%n", affected);
                     preparedStatement.close();
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
-                System.out.println("|".repeat(30) + "\n\n");
+                System.out.println("|".repeat(52));
 
                 connection.commit();
             } catch (SQLException e) {
@@ -84,16 +84,16 @@ public class ProductService {
 
                 String SQL = "INSERT INTO %s VALUES (%s)".formatted(table, itemsString);
 
-                System.out.println("|".repeat(30));
+                System.out.println("|".repeat(52));
                 try {
                     Statement statement = connection.createStatement();
                     statement.execute(SQL);
-                    System.out.printf("Item has been successfully added%n");
+                    System.out.printf("|          Item has been successfully added        |%n");
                     statement.close();
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
-                System.out.println("|".repeat(30));
+                System.out.println("|".repeat(52));
                 connection.commit();
             } catch (SQLException e) {
                 rollbackConnection(connection, savepoint);

@@ -12,23 +12,32 @@ public class UserInteract {
     }
 
     public int readInt(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         while (true) {
             try {
                 int res = scanner.nextInt();
                 scanner.nextLine();
                 return res;
             } catch (InputMismatchException e) {
-                System.out.println("\n| Invalid data. Please enter an integer. |");
+                System.out.println("""
+                        ******************************************
+                        * Invalid data. Please enter an integer. *
+                        ******************************************
+                        """);
                 scanner.nextLine();
             }
         }
+
     }
     public double checkDouble(String string){
         try {
             return Double.parseDouble(string);
         } catch (NumberFormatException e) {
-            System.out.println("\n| Value cannot be String. Try again |\n");
+            System.out.println("""
+                    ******************************************
+                    *   Value cannot be String. Try again    *
+                    ******************************************
+                    """);
         }
         return -1;
     }

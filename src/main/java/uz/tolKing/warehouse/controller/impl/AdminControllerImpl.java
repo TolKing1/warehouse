@@ -7,18 +7,17 @@ public class AdminControllerImpl implements Controller {
     final AdminService adminService = new AdminService();
 
     final String enterPrompt = """
-            Enter your prompt:
-            add <login> <password> - to add new admin
-                        
-            0 - to back main menu ⬅️
+            │ Enter your prompt:
+            │ add <login> <password> - to add new admin
+            │           \s
+            │ 0 - to back main menu ⬅️
             """;
 
     @Override
     public void table() {
         String users = adminService.getUserList();
-        String userList =
-                """
-                        User list:
+        String userList = """
+                        │ User list:
                         %s
                         """.formatted(users);
         System.out.println(userList);
@@ -27,7 +26,7 @@ public class AdminControllerImpl implements Controller {
     @Override
     public void console() {
         while (true) {
-            user.printMsg("-".repeat(40));
+            user.printMsg("+"+"─".repeat(53));
             //print users
             table();
 
@@ -35,7 +34,7 @@ public class AdminControllerImpl implements Controller {
             user.printMsg(enterPrompt);
 
             String[] next = scan.nextLine().trim().split(" ");
-
+            user.printMsg("+"+"─".repeat(53));
             //exit
             if (next.length == 1 && next[0].equals("0")) {
                 break;
@@ -46,6 +45,7 @@ public class AdminControllerImpl implements Controller {
             } else {
                 user.printMsg(extraData);
             }
+
         }
     }
 }
