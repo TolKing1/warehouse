@@ -44,28 +44,30 @@ public class MainController {
                 boolean mainFlag = true;
 
                 //print username
-                user.printMsg("-".repeat(40));
-                user.printMsg("Hello, " + connectionService.getUser());
+                user.printMsg("+"+"═".repeat(39));
+                user.printMsg("║ Hello, " + connectionService.getUser());
 
                 //print available commands and tables
                 while (mainFlag) {
                     List<String> tableList = ConnectionService.getTableNames();
                     String tablesString = TableUtil.tableListByOrder(tableList);
 
-                    user.printMsg("-".repeat(40));
-                    int mainInput = user.readInt(
-                            """
-                                    Available tables:
-                                    %s
-                                    
-                                    -2 - add new category   🆕
-                                    -1 - admin list         👥
-                                     0 - Close              ❌
-                                    Enter integer:"""
-                                    .formatted(tablesString));
+                    user.printMsg("+"+"═".repeat(39));
+                    String prompt = """
+                            ║ Available tables:
+                            %s|
+                            ║ Features for admin:
+                            ║   -2 - add new category   🆕
+                            ║   -1 - admin list         👥
+                            ║    0 - Close              ❌
+                            +---------------------------------------""";
+                    user.printMsg(prompt.formatted(tablesString));
+                    int mainInput = user.readInt("║ Enter integer:  ");
+                    user.printMsg("");
+
 
                     //wait for command input
-                    if (mainInput > 0 && mainInput - 1 <= tableList.size()) {
+                    if (mainInput > 0 && mainInput - 1 < tableList.size()) {
                         ProductControllerImpl productController = new ProductControllerImpl(connection,tableList.get(mainInput - 1));
                         productController.console();
                     } else if (mainInput == ADD_ADMIN) {
